@@ -3,7 +3,7 @@ var model = require('./post');
 module.exports = {
       
       getForm(req, res) {
-            res.marko(require('./views/form.marko'), { title: 'Teste'});
+            res.marko(require('./views/form.marko'));
       },
 
       addPost(req, res) {
