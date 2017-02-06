@@ -1,3 +1,4 @@
 /node_modules
 /dist
 /app/post/views/*.js
+npm-debug.log
