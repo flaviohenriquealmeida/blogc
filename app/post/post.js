@@ -9,15 +9,23 @@ var schema = mongoose.Schema({
         }
     }, 
     title: {
-        type: String, 
         required: true,
+        type: String, 
         index: {
             unique: true
         }
     }, 
-    body: {
-        type: String, 
+    content: {
+        required: true,
+        type: String
+        
     },
+    
+    markedContent: {
+        required: true,
+        type: String
+    },
+
     private: {
         type: Boolean
     }

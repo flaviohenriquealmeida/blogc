@@ -18,9 +18,9 @@
   "homepage": "https://github.com/flaviohenriquealmeida/blogc#readme",
   "dependencies": {
     "body-parser": "^1.16.0",
-    "dustjs-linkedin": "^2.7.5",
     "express": "^4.14.1",
     "jsonwebtoken": "^7.2.1",
+    "marked": "^0.3.6",
     "marko": "^3.14.1",
     "mongoose": "^4.8.1",
     "sitemap": "^1.9.0"
