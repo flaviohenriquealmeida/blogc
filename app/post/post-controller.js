@@ -1,4 +1,4 @@
-var model = require('./post');
+var Post = require('./post');
 
 module.exports = {
       
@@ -7,8 +7,9 @@ module.exports = {
       },
 
       addPost(req, res) {
-            
-            model.create(req.body)
+
+            req.body.private = req.body.private ? true : false;
+            Post.create(req.body)
                   .then(
                         post => res.marko(require('./views/form.marko')),
                         err => {

@@ -17,6 +17,9 @@ var schema = mongoose.Schema({
     }, 
     body: {
         type: String, 
+    },
+    private: {
+        type: Boolean
     }
 });
 
