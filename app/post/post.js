@@ -28,6 +28,11 @@ var schema = mongoose.Schema({
 
     private: {
         type: Boolean
+    },
+
+    publishedIn: {
+
+        type: Date
     }
 });
 

@@ -11,23 +11,23 @@
 
         <div class="form-group">
             <label for="slug">Slug</label>
-            <input id="slug" name="slug" class="form-control" autofocus>
+            <input id="slug" name="slug" class="form-control" autofocus value="${data.post.slug}">
         </div>
 
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" name="title" class="form-control">
+            <input id="title" name="title" class="form-control" value="${data.post.title}">
         </div>
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea style="height: 400px" id="content" name="content" class="form-control">
-            </textarea>
+            <textarea style="height: 400px" id="content" name="content" class="form-control">${data.post.content}</textarea>
         </div>
 
         <div class="form-group">
             <label for="private">Private</label>
-            <input id="private" type="checkbox" name="private" checked>
+            <input if(data.post.private) id="private" type="checkbox" name="private" checked>
+            <input else id="private" type="checkbox" name="private">
         </div>
 
         <input type="submit" class="btn btn-default">

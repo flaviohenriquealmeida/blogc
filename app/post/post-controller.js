@@ -2,30 +2,44 @@ const Post = require('./post');
 const marked = require('marked');
 
 module.exports = {
-      
-      getForm(req, res) {
-            res.marko(require('./views/form.marko'));
-      },
 
-      addPost(req, res) {
+    getForm(req, res) {
 
-            req.body.private = req.body.private ? true : false;
-            req.body.markedContent = marked(req.body.content);
+        if(req.params.id) {
+            Post
+                .findOne({})
+                .where('slug').equals(req.params.id)
+                .then(post => res.marko(require('./views/form.marko'), { post }));
+            } else {
+                res.marko(require('./views/form.marko'), { post: {}});
+        }
+    },
 
-            Post.create(req.body)
-                  .then(
-                        post => res.marko(require('./views/form.marko')),
-                        err => {
-                              console.log(err);
-                              res.marko(require('./views/form.marko'))
-                        }
-                  );
-      },
+    addPost(req, res) {
 
-      viewPost(req, res) {
-            console.log(req.params.slug);
-            Post.findOne({})
-                  .where('slug').equals(req.params.slug)
-                  .then(post => res.marko(require('./views/post.view.marko'), { post }))
-      }
+        req.body.private = req.body.private ? true : false;
+        req.body.markedContent = marked(req.body.content);
+
+        Post.create(req.body)
+            .then(
+                post => res.marko(require('./views/form.marko'), { post: {}}),
+                err => {
+                    console.log(err);
+                    res.marko(require('./views/form.marko'), { post: {}});
+                }
+            );
+    },
+
+    viewPost(req, res) {
+
+        Post.findOne({})
+        .where('slug').equals(req.params.slug)
+        .then(post => res.marko(require('./views/post.view.marko'), { post }))
+    },
+
+    getPosts(req, res) {
+
+        Post.find({})
+            .then(posts => res.marko(require('./views/posts.marko'), { posts }));
+    }
 }

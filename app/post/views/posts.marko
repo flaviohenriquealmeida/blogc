@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">    
+</head>
+<body class="container">
+
+    <table class="table table-hover">
+        <tr>
+            <th>Post</th>
+            <th>Ações</th>
+        </tr>
+        <tr for(post in data.posts)>
+            <td>${post.title}</td>
+            <td>
+                <form action="/post/form/${post.slug}">
+                    <button class="btn btn-button" type="submit">Editar</button>
+                </form>
+                <form action="/post/${post.slug}">
+                    <button class="btn btn-button" type="submit">Visualizar</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
