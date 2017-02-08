@@ -7,6 +7,8 @@
 </head>
 <body class="container">
 
+    <include('../../base/views/header.marko') title="POSTS"/>
+    
     <table class="table table-hover">
         <tr>
             <th>Post</th>
@@ -18,11 +20,12 @@
                 <form action="/post/form/${post.slug}">
                     <button class="btn btn-button" type="submit">Editar</button>
                 </form>
-                <form action="/post/${post.slug}">
+                <form action="/${post.slug}">
                     <button class="btn btn-button" type="submit">Visualizar</button>
                 </form>
             </td>
         </tr>
     </table>
+    <include('../../base/views/footer.marko')/>
 </body>
 </html>

@@ -34,7 +34,11 @@ module.exports = {
 
         Post.findOne({})
         .where('slug').equals(req.params.slug)
-        .then(post => res.marko(require('./views/post.view.marko'), { post }))
+        .then(post => {
+            if(!post) return res.status(404).marko(require('./views/notfound.marko'));
+            res.marko(require('./views/post.view.marko'), { post })
+
+        });
     },
 
     getPosts(req, res) {
