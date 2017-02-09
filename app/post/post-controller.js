@@ -3,11 +3,22 @@ const marked = require('marked');
 
 module.exports = {
 
-    // duas responsabilidades, dividir
-    async getForm(req, res) {
-        let post = {};
-        if(req.params.id) post = await Post.findById(req.params.id);
-        res.marko(require('./views/form.marko'), { post });
+
+    async getAddForm(req, res) {
+        res.marko(require('./views/form.marko'), { post:{}});
+    },
+
+    async getEditForm(req, res) {
+
+        try {
+            const post = await Post.findById(req.params.id);
+            res.marko(require('./views/form.marko'), { post });
+        } catch(err) {
+            console.log(err);
+            res.marko(require('./views/notfound'));
+        }
+        
+        
     },
 
     async addPost(req, res) {
@@ -21,7 +32,6 @@ module.exports = {
             res.marko(template, { post: {}});
         } catch(err) {
             console.log(err);
-            // enviar mensagem e erro
             res.marko(template, { post: {}});
         }
     },
@@ -46,7 +56,7 @@ module.exports = {
     },
 
     async getPosts(req, res) {
-
+        
         const posts = await Post.find({})
         res.marko(require('./views/posts.marko'), { posts });
     }
