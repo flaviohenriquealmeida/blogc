@@ -3,51 +3,49 @@ const marked = require('marked');
 
 module.exports = {
 
-    getForm(req, res) {
-
-        if(req.params.id) {
-            Post
-                .findById(req.params.id)
-                .then(post => res.marko(require('./views/form.marko'), { post }));
-            } else {
-                res.marko(require('./views/form.marko'), { post: {}});
-        }
+    async getForm(req, res) {
+        let post = {};
+        if(req.params.id) post = await Post.findById(req.params.id);
+        res.marko(require('./views/form.marko'), { post });
     },
 
-    addPost(req, res) {
+    async addPost(req, res) {
 
         req.body.private = req.body.private ? true : false;
         req.body.markedContent = marked(req.body.content);
-
-        Post.create(req.body)
-            .then(
-                post => res.marko(require('./views/form.marko'), { post: {}}),
-                err => {
-                    console.log(err);
-                    res.marko(require('./views/form.marko'), { post: {}});
-                }
-            );
-    },
-
-    updatePost(req, res) {
+        const template = require('./views/form.marko');
         
-        Post.findByIdAndUpdate(req.params.id, req.body)
-        .then(post => res.redirect(`/post/form/${req.params.id}`))
+        try {
+            await Post.create(req.body);
+            res.marko(template, { post: {}});
+        } catch(err) {
+            console.log(err);
+            res.marko(template, { post: {}});
+        }
     },
 
-    viewPost(req, res) {
-
-        Post.findOne({})
-        .where('slug').equals(req.params.slug)
-        .then(post => {
-            if(!post) return res.status(404).marko(require('./views/notfound.marko'));
-            res.marko(require('./views/post.view.marko'), { post })
-        });
+    async updatePost(req, res) {
+        
+        await Post.findByIdAndUpdate(req.params.id, req.body)
+        res.redirect(`/post/form/${req.params.id}`);
     },
 
-    getPosts(req, res) {
+    async viewPost(req, res) {
 
-        Post.find({})
-            .then(posts => res.marko(require('./views/posts.marko'), { posts }));
+        const post = await Post
+            .findOne({})
+            .where('slug')
+            .equals(req.params.slug);
+        
+        const template = require('./views/post.view.marko');
+        if(!post) return res.status(404).marko(template);
+        res.marko(template, { post })
+
+    },
+
+    async getPosts(req, res) {
+
+        const posts = await Post.find({})
+        res.marko(require('./views/posts.marko'), { posts });
     }
 }
