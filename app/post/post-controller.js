@@ -7,8 +7,7 @@ module.exports = {
 
         if(req.params.id) {
             Post
-                .findOne({})
-                .where('slug').equals(req.params.id)
+                .findById(req.params.id)
                 .then(post => res.marko(require('./views/form.marko'), { post }));
             } else {
                 res.marko(require('./views/form.marko'), { post: {}});
@@ -30,6 +29,12 @@ module.exports = {
             );
     },
 
+    updatePost(req, res) {
+        
+        Post.findByIdAndUpdate(req.params.id, req.body)
+        .then(post => res.redirect(`/post/form/${req.params.id}`))
+    },
+
     viewPost(req, res) {
 
         Post.findOne({})
@@ -37,7 +42,6 @@ module.exports = {
         .then(post => {
             if(!post) return res.status(404).marko(require('./views/notfound.marko'));
             res.marko(require('./views/post.view.marko'), { post })
-
         });
     },
 

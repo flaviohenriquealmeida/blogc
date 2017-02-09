@@ -17,7 +17,7 @@
         <tr for(post in data.posts)>
             <td>${post.title}</td>
             <td>
-                <form action="/post/form/${post.slug}">
+                <form action="/post/form/${post._id}">
                     <button class="btn btn-button" type="submit">Editar</button>
                 </form>
                 <form action="/${post.slug}">

@@ -7,7 +7,8 @@ module.exports = app => {
 	app.get('/sitemap.xml', sitemapController.getSitemap);
     app.get('/post/form', postController.getForm);
     app.get('/post/form/:id', postController.getForm);
-    app.post('/post/add', postController.addPost);
+    app.post('/post/save', postController.addPost);
+    app.post('/post/save/:id', postController.updatePost);
     app.get('/posts', postController.getPosts);
     app.get('/:slug', postController.viewPost);
 };

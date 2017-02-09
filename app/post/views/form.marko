@@ -9,7 +9,7 @@
 
     <include('../../base/views/header.marko') title="New POST"/>
 
-    <form action="/post/add" method="POST">
+    <form action="/post/save/${data.post._id}" method="POST">
 
         <div class="form-group">
             <label for="slug">Slug</label>
