@@ -3,6 +3,7 @@ const marked = require('marked');
 
 module.exports = {
 
+    // duas responsabilidades, dividir
     async getForm(req, res) {
         let post = {};
         if(req.params.id) post = await Post.findById(req.params.id);
@@ -14,12 +15,13 @@ module.exports = {
         req.body.private = req.body.private ? true : false;
         req.body.markedContent = marked(req.body.content);
         const template = require('./views/form.marko');
-        
+
         try {
             await Post.create(req.body);
             res.marko(template, { post: {}});
         } catch(err) {
             console.log(err);
+            // enviar mensagem e erro
             res.marko(template, { post: {}});
         }
     },
