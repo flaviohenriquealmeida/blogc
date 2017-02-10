@@ -16,7 +16,7 @@ app.use(methodOverride((req, res) => {
   }
 }));
 
-require('./routes')(app);
+require('../app');
 
 app.use('*', (req, res) => res.status(404).marko(require("../app/base/views/errors/404.marko")));
 // app.use((error,req, res, next) => res.status(500).marko("../app/base/errors/500.marko"));

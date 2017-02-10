@@ -1,9 +1,10 @@
-const Post = require('./post');
-const postController = require('./post-controller');
-const postService = require('./post-service');
-
+const model = require('./post');
+const service = require('./post-service');
+const routes = require('./post-routes');
+console.log('do required')
+console.log(routes);
 module.exports = { 
-      Post,
-      postController, 
-      postService
+      model,
+      service,
+      routes
 };

@@ -1,4 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import 'highlightjs';
-//hljs.initHighlightingOnLoad();
+module.exports = app => {
+    
+    require('../app/post').routes(app);
+    require('../app/sitemap').routes(app);
+}

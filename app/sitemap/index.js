@@ -1,5 +1,3 @@
-const sitemapController = require('./sitemap-controller');
-module.exports = {
+const routes = require('./sitemap-routes');
 
-    sitemapController
-};
+module.exports = { routes };

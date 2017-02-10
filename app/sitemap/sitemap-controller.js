@@ -1,5 +1,5 @@
 const sm = require('sitemap');
-const { Post } = require('../post');
+const Post = require('../post').model;
 
 module.exports = {
 
