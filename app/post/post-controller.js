@@ -14,7 +14,7 @@ module.exports = {
         const messages = req.query.saved ? ['Post successfully saved!'] : [];
 
         try {
-            const post = await Post.findById(req.params.id);
+            const post = await Post.findById(req.query._id);
             res.marko(require('./views/form.marko'), { post, messages });
         } catch(err) {
             console.log(err);
@@ -56,23 +56,21 @@ module.exports = {
     },
 
     async updatePost(req, res) {
-        
+        console.log('chamou update');
         const post = req.body;
-        const postId = req.params.id;
-
         const oldPost = await Post
             .findOne({})
             .where('slug')
             .equals(post.slug)
-            .ne('_id', postId);
+            .ne('_id', post._id);
 
         if(oldPost) return res.marko(require('./views/form.marko'), { 
             post,
             errors: ['Post slug already exists!']
         });
 
-        await Post.findByIdAndUpdate(postId, post)
-        res.redirect(`/post/form/${req.params.id}/?saved=true`);
+        await Post.findByIdAndUpdate(post._id, post)
+        res.redirect(`/post/form/edit/?_id=${post._id}&saved=true`);
     },
 
     async viewPost(req, res) {
@@ -91,13 +89,13 @@ module.exports = {
 
     async getPosts(req, res) {
         const messages = req.query.removed ? ['Post successfully removed!'] : [];
-        const posts = await Post.find({})
+        const posts = await Post.find({}).sort({ publishedIn: 'desc'});
         res.marko(require('./views/posts.marko'), { posts, messages});
     },
 
     async removePost(req, res) {
 
-        await Post.findOneAndRemove(req.params.id);
+        await Post.findOneAndRemove(req.query._id);
         res.redirect('/posts?removed=true');
     }
 }

@@ -33,6 +33,10 @@ var schema = mongoose.Schema({
     publishedIn: {
 
         type: Date
+    },
+
+    createdIn: {
+        type: Date
     }
 });
 

@@ -20,23 +20,28 @@
             <th>Ações</th>
         </tr>
         <tr for(post in data.posts)>
-            <td>${post.title}</td>
+            <td>
+                <p>${post.title}</p>
+                <p>/${post.slug}</p>
+            </td>
             <td>
                 <div class="row">
-                    <form class="col-md-1" action="/post/form/${post._id}">
-                        <button class="btn btn-default" type="submit">Edit</button>
-                    </form>
-                    <form class="col-md-1" action="/post/${post.slug}">
-                        <button class="btn btn-default" type="submit">View</button>
-                    </form>
-                    <form class="col-md-1" action="/post/remove/${post.slug}" method="POST">
+                    <div class="col-md-1">
+                        <a class="btn btn-default" href="/post/form/edit?_id=${post._id}">Edit</a>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="btn btn-default" href="/post/${post.slug}">View</a>
+                    </div>
+                    <form class="col-md-1" action="/post/remove" method="POST">
+                        <input type="hidden" name="_id" value="${post._id}">
+                        <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-default" type="submit">Remove</button>
                     </form>
                 </div>
             </td>
         </tr>
     </table>
-    <form action="/post/form">
+    <form action="/post/form/add">
         <button type="submit" class="btn btn-primary">New POST</button>
     </form>
     <include('../../base/views/footer.marko')/>

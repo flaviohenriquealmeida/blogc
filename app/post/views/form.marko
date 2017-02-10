@@ -17,16 +17,21 @@
     <include('../../base/views/messages.marko') messages="${data.messages}"/>
     </div>    
 
-    <form action="/post/save/${data.post._id}" method="POST">
-    
+    <form action="/post/save" method="POST">
+
+        <div if(data.post._id)>
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="_id" value="${data.post._id}">
+        </div>
+
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" value="${data.post.title}" autocomplete="off">
+            <input id="title" name="title" class="form-control" value="${data.post.title}" autocomplete="off" autofocus>
         </div>
 
         <div class="form-group">
             <label for="slug">Slug</label>
-            <input id="slug" name="slug" class="form-control" autofocus value="${data.post.slug}" autocomplete="off">
+            <input id="slug" name="slug" class="form-control"  value="${data.post.slug}" autocomplete="off">
         </div>
 
         <div class="form-group">
