@@ -3,7 +3,6 @@ const marked = require('marked');
 
 module.exports = {
 
-
     async getAddForm(req, res) {
 
         res.marko(require('./views/form.marko'), { post:{}});
