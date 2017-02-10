@@ -9,21 +9,29 @@
 
     <include('../../base/views/header.marko') title="${data.post._id ? 'Edit' : 'New'}"/>
 
+    <div if(data.errors)>
+    <include('../../base/views/messages.marko') messages="${data.errors}" errorMessage="true"/>
+    </div>
+
+    <div if(data.messages)>
+    <include('../../base/views/messages.marko') messages="${data.messages}"/>
+    </div>    
+
     <form action="/post/save/${data.post._id}" method="POST">
 
         <div class="form-group">
-            <label for="slug">Slug</label>
-            <input id="slug" name="slug" class="form-control" autofocus value="${data.post.slug}">
+            <label for="title">Title</label>
+            <input id="title" name="title" class="form-control" value="${data.post.title}" autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" value="${data.post.title}">
+            <label for="slug">Slug</label>
+            <input id="slug" name="slug" class="form-control" autofocus value="${data.post.slug}" autocomplete="off">
         </div>
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea style="height: 400px" id="content" name="content" class="form-control">${data.post.content}</textarea>
+            <textarea style="height: 400px" id="content" name="content" class="form-control" autocomplete="off">${data.post.content}</textarea>
         </div>
 
         <div class="form-group">
@@ -31,8 +39,8 @@
             <input if(data.post.private) id="private" type="checkbox" name="private" checked>
             <input else id="private" type="checkbox" name="private">
         </div>
-
-        <input type="submit" class="btn btn-default">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-default" href="/posts">Back</a>
     </form>
 </body>
 </html>

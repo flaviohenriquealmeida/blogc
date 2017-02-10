@@ -8,7 +8,7 @@ function create(__helpers) {
       footer_template = loadTemplate(require.resolve("../footer.marko"));
 
   return function render(data, out) {
-    out.w("<!DOCTYPE html><html lang=\"pt-br\"><head><meta charset=\"UTF-8\"><title>Document</title><link rel=\"stylesheet\" href=\"style.css\"> </head><body class=\"container\">");
+    out.w("<!DOCTYPE html><html lang=\"pt-br\"><head><meta charset=\"UTF-8\"><title>Document</title><link rel=\"stylesheet\" href=\"/styles.css\"> </head><body class=\"container\">");
 
     header_template.render({
         title: "Page not found"

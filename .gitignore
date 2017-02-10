@@ -2,3 +2,4 @@
 /dist
 /app/post/views/*.js
 npm-debug.log
+.DS_Store

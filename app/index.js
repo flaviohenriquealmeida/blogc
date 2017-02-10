@@ -1,2 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'highlightjs';
+//hljs.initHighlightingOnLoad();
