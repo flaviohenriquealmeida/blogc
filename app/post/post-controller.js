@@ -5,13 +5,11 @@ module.exports = {
 
 
     async getAddForm(req, res) {
-        console.log('getAddForm');
 
         res.marko(require('./views/form.marko'), { post:{}});
     },
 
     async getEditForm(req, res) {
-        console.log('getEditForm');
 
         const messages = req.query.saved ? ['Post successfully saved!'] : [];
 
@@ -28,7 +26,6 @@ module.exports = {
 
     async addPost(req, res) {
         
-        console.log('addPost');
         const newPost = req.body;
         const oldPost = await Post
             .findOne({})
@@ -59,9 +56,7 @@ module.exports = {
     },
 
     async updatePost(req, res) {
-
-        console.log('updatePost');
-
+        
         const post = req.body;
         const postId = req.params.id;
 
