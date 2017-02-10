@@ -1,11 +1,12 @@
 const Post = require('./post');
 const marked = require('marked');
+const views = require('./views');
 
 module.exports = {
 
     async getAddForm(req, res) {
 
-        res.marko(require('./views/form.marko'), { post:{}});
+        res.marko(views.form, { post:{}});
     },
 
     async getEditForm(req, res) {
@@ -14,10 +15,10 @@ module.exports = {
 
         try {
             const post = await Post.findById(req.query._id);
-            res.marko(require('./views/form.marko'), { post, messages });
+            res.marko(views.form, { post, messages });
         } catch(err) {
             console.log(err);
-            res.marko(require('./views/notfound'));
+            res.marko(views.form);
         }
         
         
@@ -31,9 +32,7 @@ module.exports = {
             .where('slug')
             .equals(newPost.slug);
 
-        const formTemplate = require('./views/form.marko');
-
-        if(oldPost) return res.marko(formTemplate, { 
+        if(oldPost) return res.marko(views.form, { 
             post: {},
             errors: ['Post slug already exists!']
         });
@@ -43,14 +42,14 @@ module.exports = {
 
         try {
             await Post.create(newPost);
-            res.marko(formTemplate, { 
+            res.marko(views.form, { 
                 post: {},
                 messages: ['Post successfully added!']
             });
 
         } catch(err) {
             console.log(err);
-            res.marko(formTemplate, { post: {}});
+            res.marko(views.form, { post: {}});
         }
     },
 
@@ -63,7 +62,7 @@ module.exports = {
             .equals(post.slug)
             .ne('_id', post._id);
 
-        if(oldPost) return res.marko(require('./views/form.marko'), { 
+        if(oldPost) return res.marko(views.form, { 
             post,
             errors: ['Post slug already exists!']
         });
@@ -81,15 +80,15 @@ module.exports = {
             .where('slug')
             .equals(req.params.slug);
     
-        if(!post) return res.status(404).marko(require('./views/notfound.marko'));
-        res.marko(require('./views/post.view.marko'), { post })
+        if(!post) return res.status(404).marko(views.notfound);
+        res.marko(views.postView, { post })
 
     },
 
     async getPosts(req, res) {
         const messages = req.query.removed ? ['Post successfully removed!'] : [];
         const posts = await Post.find({}).sort({ publishedIn: 'desc'});
-        res.marko(require('./views/posts.marko'), { posts, messages});
+        res.marko(views.posts, { posts, messages});
     },
 
     async removePost(req, res) {
