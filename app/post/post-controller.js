@@ -20,22 +20,18 @@ module.exports = {
             console.log(err);
             res.marko(views.form);
         }
-        
-        
     },
 
     async addPost(req, res) {
-        
-        const newPost = req.body;
-        const oldPost = await Post
+
+        if(await Post
             .findOne({})
             .where('slug')
-            .equals(newPost.slug);
-
-        if(oldPost) return res.marko(views.form, { 
-            post: {},
-            errors: ['Post slug already exists!']
-        });
+            .equals(newPost.slug))
+            return res.marko(views.form, { 
+                post: {}, 
+                errors: ['Post slug already exists!']
+            });
 
         newPost.private = newPost.private ? true : false;
         newPost.markedContent = marked(newPost.content);
@@ -55,18 +51,21 @@ module.exports = {
 
     async updatePost(req, res) {
         console.log('chamou update');
+
         const post = req.body;
-        const oldPost = await Post
+
+        if(await Post
             .findOne({})
             .where('slug')
             .equals(post.slug)
-            .ne('_id', post._id);
-
-        if(oldPost) return res.marko(views.form, { 
-            post,
-            errors: ['Post slug already exists!']
-        });
-
+            .ne('_id', post._id))
+            return res.marko(views.form, { 
+                post,
+                errors: ['Post slug already exists!']
+            });
+        
+        post.private = post.private ? true : false;
+        post.markedContent = marked(post.content);            
         await Post.findByIdAndUpdate(post._id, post)
         res.redirect(`/post/form/edit/?_id=${post._id}&saved=true`);
     },
