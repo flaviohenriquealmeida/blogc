@@ -1,6 +1,6 @@
-const Post = require('./post');
 const marked = require('marked');
 const views = require('./views');
+const service = require('./post-service');
 
 module.exports = {
 
@@ -11,74 +11,47 @@ module.exports = {
 
     async getEditForm(req, res) {
 
-        const messages = req.query.saved ? ['Post successfully saved!'] : [];
-
-        try {
-            const post = await Post.findById(req.query._id);
-            res.marko(views.form, { post, messages });
-        } catch(err) {
-            console.log(err);
-            res.marko(views.form);
-        }
+        const messages = req.query.saved ? ['Post successfully saved!'] : [];        
+        const post = await service.findById(req.query._id);
+        res.marko(views.form, { post, messages });
+    
     },
 
     async addPost(req, res) {
 
-        if(await Post
-            .findOne({})
-            .where('slug')
-            .equals(newPost.slug))
-            return res.marko(views.form, { 
-                post: {}, 
-                errors: ['Post slug already exists!']
-            });
-
-        newPost.private = newPost.private ? true : false;
-        newPost.markedContent = marked(newPost.content);
-
-        try {
-            await Post.create(newPost);
+        const post = req.body;
+        post.private = post.private ? true : false;
+        const result = await service.add(post);
+        if(result.done) {
             res.marko(views.form, { 
-                post: {},
-                messages: ['Post successfully added!']
+                post: {}, 
+                messages: result.messages
             });
-
-        } catch(err) {
-            console.log(err);
-            res.marko(views.form, { post: {}});
+        } else {
+            res.marko(views.form, { 
+                post, 
+                errors: result.messages
+            });            
         }
     },
 
     async updatePost(req, res) {
-        console.log('chamou update');
 
         const post = req.body;
-
-        if(await Post
-            .findOne({})
-            .where('slug')
-            .equals(post.slug)
-            .ne('_id', post._id))
-            return res.marko(views.form, { 
+        const result = await service.update(post);
+        if(result.done) {
+             res.redirect(`/post/form/edit/?_id=${post._id}&saved=true`);
+        } else {
+            res.marko(views.form, { 
                 post,
-                errors: ['Post slug already exists!']
+                errors: result.messages
             });
-        
-        post.private = post.private ? true : false;
-        post.markedContent = marked(post.content);            
-        await Post.findByIdAndUpdate(post._id, post)
-        res.redirect(`/post/form/edit/?_id=${post._id}&saved=true`);
+        }
     },
 
     async viewPost(req, res) {
 
-        console.log('viewPost');
-
-        const post = await Post
-            .findOne({})
-            .where('slug')
-            .equals(req.params.slug);
-    
+        const post = await service.findBySlug(req.params.slug);    
         if(!post) return res.status(404).marko(views.notfound);
         res.marko(views.postView, { post })
 
@@ -86,13 +59,13 @@ module.exports = {
 
     async getPosts(req, res) {
         const messages = req.query.removed ? ['Post successfully removed!'] : [];
-        const posts = await Post.find({}).sort({ publishedIn: 'desc'});
-        res.marko(views.posts, { posts, messages});
+        const posts = await service.getPosts();
+        res.marko(views.posts, { posts, messages });
     },
 
     async removePost(req, res) {
 
-        await Post.findOneAndRemove(req.query._id);
+        await service.remove(req.query._id);
         res.redirect('/posts?removed=true');
     }
 }
