@@ -14,7 +14,7 @@ function create(__helpers) {
         title: "Page not found"
       }, out);
 
-    out.w("<p>Page not found</p><a href=\"/posts\">Back</a>");
+    out.w("<p>Page not found</p><a href=\"/\">Back</a>");
 
     footer_template.render({}, out);
 

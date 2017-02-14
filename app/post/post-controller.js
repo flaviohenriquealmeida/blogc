@@ -5,8 +5,8 @@ const service = require('./post-service');
 module.exports = {
 
     async getAddForm(req, res) {
-
-        res.marko(views.form, { post:{}});
+        const messages = req.query.saved ? ['Post successfully saved!'] : [];        
+        res.marko(views.form, { post: {}, messages});
     },
 
     async getEditForm(req, res) {
@@ -23,10 +23,7 @@ module.exports = {
         post.private = post.private ? true : false;
         const result = await service.add(post);
         if(result.done) {
-            res.marko(views.form, { 
-                post: {}, 
-                messages: result.messages
-            });
+            res.redirect(`/admin/post/form/add/?saved=true`);
         } else {
             res.marko(views.form, { 
                 post, 
@@ -40,7 +37,7 @@ module.exports = {
         const post = req.body;
         const result = await service.update(post);
         if(result.done) {
-             res.redirect(`/post/form/edit/?_id=${post._id}&saved=true`);
+             res.redirect(`/admin/post/form/edit/?_id=${post._id}&saved=true`);
         } else {
             res.marko(views.form, { 
                 post,
@@ -66,6 +63,6 @@ module.exports = {
     async removePost(req, res) {
 
         await service.remove(req.query._id);
-        res.redirect('/posts?removed=true');
+        res.redirect('/admin/posts?removed=true');
     }
 }

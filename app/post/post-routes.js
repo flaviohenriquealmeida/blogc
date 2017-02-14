@@ -2,12 +2,12 @@ const ctrl = require('./post-controller');
 
 module.exports = app => {
 
-    app.get('/posts', ctrl.getPosts);
-    app.get('/post/form/edit', ctrl.getEditForm);
-    app.get('/post/form/add', ctrl.getAddForm);
-    app.post('/post/save', ctrl.addPost);
-    app.put('/post/save', ctrl.updatePost);
-    app.delete('/post/remove', ctrl.removePost);        
+    app.get('/admin/posts', ctrl.getPosts);
+    app.get('/admin/post/form/edit', ctrl.getEditForm);
+    app.get('/admin/post/form/add', ctrl.getAddForm);
+    app.post('/admin/post/save', ctrl.addPost);
+    app.put('/admin/post/save', ctrl.updatePost);
+    app.delete('/admin/post/remove', ctrl.removePost);        
     app.get('/post/:slug/', ctrl.viewPost);
     app.get('/', ctrl.getPosts);
 };

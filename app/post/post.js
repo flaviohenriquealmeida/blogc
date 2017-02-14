@@ -10,10 +10,7 @@ var schema = mongoose.Schema({
     }, 
     title: {
         required: true,
-        type: String, 
-        index: {
-            unique: true
-        }
+        type: String,
     }, 
     content: {
         required: true,

@@ -23,5 +23,16 @@ module.exports = {
      },
     plugins: [
         new ExtractTextPlugin('styles.css'),
-    ]
+    ],
+    
+    devServer: {
+        proxy: {
+            "/*": {
+                target: "http://localhost:3000",
+                secure: false,
+                rewrite: function(req, options) {}
+            },
+        }
+    },    
 }
+

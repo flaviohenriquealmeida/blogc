@@ -27,12 +27,12 @@
             <td>
                 <div class="row">
                     <div class="col-md-1">
-                        <a class="btn btn-default" href="/post/form/edit?_id=${post._id}">Edit</a>
+                        <a class="btn btn-default" href="/admin/post/form/edit?_id=${post._id}">Edit</a>
                     </div>
                     <div class="col-md-1">
                         <a class="btn btn-default" href="/post/${post.slug}">View</a>
                     </div>
-                    <form class="col-md-1" action="/post/remove" method="POST">
+                    <form class="col-md-1" action="/admin/post/remove" method="POST">
                         <input type="hidden" name="_id" value="${post._id}">
                         <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-default" type="submit">Remove</button>
@@ -41,7 +41,7 @@
             </td>
         </tr>
     </table>
-    <form action="/post/form/add">
+    <form action="/admin/post/form/add">
         <button type="submit" class="btn btn-primary">New POST</button>
     </form>
     <include('../../base/views/footer.marko')/>
