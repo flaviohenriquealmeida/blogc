@@ -1,6 +1,6 @@
 /node_modules
 /dist
-/app/post/views/*.marko.js
-/app/base/views/*.marko.js
+/app/post/views/**/*.marko.js
+/app/base/views/**/*.marko.js
 npm-debug.log
 .DS_Store
