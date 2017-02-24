@@ -1,6 +1,10 @@
-const loginForm = require('./login-form');
+const loginForm = require('./login-form.marko');
+const page401 = require('./errors/401.marko');
 
 module.exports = {
     
-    loginForm
+    loginForm,
+    errors: {
+        page401
+    }
 }

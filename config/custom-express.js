@@ -4,6 +4,7 @@ require('marko/node-require').install();
 require('marko/express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +16,8 @@ app.use(methodOverride((req, res) => {
     return method
   }
 }));
+
+app.use(cookieParser());
 
 require('../app')(app);
 

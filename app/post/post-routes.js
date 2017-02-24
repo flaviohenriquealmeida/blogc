@@ -9,5 +9,4 @@ module.exports = app => {
     app.put('/admin/post/save', ctrl.updatePost);
     app.delete('/admin/post/remove', ctrl.removePost);        
     app.get('/post/:slug/', ctrl.viewPost);
-    app.get('/', ctrl.getPosts);
 };

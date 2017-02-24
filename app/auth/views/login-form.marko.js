@@ -13,7 +13,7 @@ function create(__helpers) {
         title: "LOGIN"
       }, out);
 
-    out.w("<form action=\"/login\" method=\"POST\"><div class=\"form-group\"><label for=\"email\">E-mail</label><input type=\"email\" id=\"email\" name=\"email\" class=\"form-control\" autocomplete=\"off\" autofocus></div><div class=\"form-group\"><label for=\"password\">Password</label><input id=\"password\" name=\"password\" class=\"form-control\" autocomplete=\"off\"></div><button type=\"submit\" class=\"btn btn-primary\">ENTER</button></form></body></html>");
+    out.w("<form action=\"/admin/authenticate\" method=\"POST\"><div class=\"form-group\"><label for=\"email\">E-mail</label><input type=\"email\" id=\"email\" name=\"email\" class=\"form-control\" autocomplete=\"off\" autofocus></div><div class=\"form-group\"><label for=\"password\">Password</label><input type=\"password\" id=\"password\" name=\"password\" class=\"form-control\" autocomplete=\"off\"></div><button type=\"submit\" class=\"btn btn-primary\">ENTER</button></form></body></html>");
   };
 }
 
