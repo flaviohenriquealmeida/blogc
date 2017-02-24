@@ -37,7 +37,7 @@ module.exports = {
              jwt.verify(token, secret, function(err, decoded) {
                  if (err) {
                      console.log('Token was rejected');
-                     return res.sendStatus(401).marko(views.errors.page401);
+                     res.status(401).marko(views.errors.page401);
                  } else {
                      console.log('Token was accepted')
                      // guardou o valor decodificado do token na requisição. No caso, o login do usuário.
@@ -48,7 +48,6 @@ module.exports = {
         } else {
             console.log('No token was send');
             res.status(401).redirect('/admin/login');
-            next();
         }
     },
 
@@ -58,8 +57,10 @@ module.exports = {
     },
 
     logout(req, res) {
-        
-        delete res.cookies.token;
-        res.redirect('/admin/login');
+        res.cookie('token', '', {
+            expires  : new Date(Date.now() + -9999999),
+            httpOnly : true
+        });
+        res.redirect('/admin/posts');
     }
 }
