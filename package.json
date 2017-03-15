@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --ignore *.marko.js server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js"
   },
@@ -26,7 +27,7 @@
     "highlightjs": "^9.8.0",
     "jsonwebtoken": "^7.2.1",
     "marked": "^0.3.6",
-    "marko": "^3.14.1",
+    "marko": "^3.14.2",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.1",
     "sitemap": "^1.9.0"

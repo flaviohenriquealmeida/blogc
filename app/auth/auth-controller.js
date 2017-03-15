@@ -14,7 +14,7 @@ module.exports = {
          
          if (!user) {
              console.log('invalid login');
-             res.redirect(`/login?invalid=true`);
+             res.redirect(`/admin/login?invalid=true`);
          } else {
              console.log('valid login');
              var token = jwt.sign( { email: user.email }, secret, {
