@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -80,6 +80,12 @@
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*! highlight.js v9.8.0 | BSD3 License | git.io/hljslicense */
@@ -15677,7 +15683,7 @@ hljs.registerLanguage('zephir', function(hljs) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15686,11 +15692,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_dist_css_bootstrap_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_bootstrap_dist_css_bootstrap_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap_dist_css_bootstrap_theme_css__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap_dist_css_bootstrap_theme_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bootstrap_dist_css_bootstrap_theme_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_highlightjs__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_highlightjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_highlightjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_highlightjs_styles_default_css__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_highlightjs_styles_default_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_highlightjs_styles_default_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_highlightjs__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_highlightjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_highlightjs__);
 
 
 
+
+__WEBPACK_IMPORTED_MODULE_3_highlightjs___default.a.initHighlightingOnLoad();
 
 /***/ })
 /******/ ]);
