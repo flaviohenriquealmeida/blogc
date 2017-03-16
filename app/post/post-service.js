@@ -70,6 +70,11 @@ module.exports = {
             .find({})
             .sort({ publishedIn: 'desc'})
             .skip(page*limit).limit(limit);
+    },
+
+    async getNumberOfAllPosts() {
+
+        return await Post.count({});
     }
 
 }   

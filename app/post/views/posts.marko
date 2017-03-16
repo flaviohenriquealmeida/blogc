@@ -9,7 +9,7 @@
 <body class="container">
 
     <include('../../base/views/header.marko') title="POSTS"/>
-    
+
     <div if(data.messages)>
     <include('../../base/views/messages.marko') messages="${data.messages}"/>
     </div>
@@ -41,6 +41,8 @@
             </td>
         </tr>
     </table>
+
+    <include('../../base/views/paginator.marko') pages="${data.pages}" limit="${data.limit}" currentPage="${data.currentPage}"/>
     <form action="/admin/post/form/add">
         <button type="submit" class="btn btn-primary">New POST</button>
     </form>

@@ -55,11 +55,15 @@ module.exports = {
     },
 
     async getPosts(req, res) {
+
         const messages = req.query.removed ? ['Post successfully removed!'] : [];
-        const page = req.query.page;
-        const limit = req.query.limit;
-        const posts = await service.getPosts(parseInt(page), parseInt(limit));
-        res.marko(views.posts, { posts, messages });
+        const currentPage = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
+        const total = await service.getNumberOfAllPosts();
+        const pages = Math.ceil(total/limit);
+        console.log(pages);
+        const posts = await service.getPosts(parseInt(currentPage), parseInt(limit));
+        res.marko(views.posts, { posts, messages, currentPage, limit, pages });
     },
 
     async removePost(req, res) {
