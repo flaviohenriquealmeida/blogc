@@ -64,9 +64,12 @@ module.exports = {
         return await Post.findById(id)
     },    
 
-    async getPosts() {
-
-        return await Post.find({}).sort({ publishedIn: 'desc'});
+    async getPosts(page, limit) {
+        
+        return await Post
+            .find({})
+            .sort({ publishedIn: 'desc'})
+            .skip(page*limit).limit(limit);
     }
 
 }   

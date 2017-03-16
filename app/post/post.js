@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// var mongoosePaginate = require('mongoose-paginate');
 
 var schema = mongoose.Schema({
     slug: { 
@@ -36,5 +37,7 @@ var schema = mongoose.Schema({
         type: Date
     }
 });
+
+// schema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Post', schema);

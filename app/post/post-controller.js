@@ -56,7 +56,9 @@ module.exports = {
 
     async getPosts(req, res) {
         const messages = req.query.removed ? ['Post successfully removed!'] : [];
-        const posts = await service.getPosts();
+        const page = req.query.page;
+        const limit = req.query.limit;
+        const posts = await service.getPosts(parseInt(page), parseInt(limit));
         res.marko(views.posts, { posts, messages });
     },
 
