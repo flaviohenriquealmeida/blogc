@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ignore *.marko.js server",
+    "express-server": "nodemon --ignore *.marko.js server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "webpack-server": "webpack-dev-server",
+    "start": "npm run express-server | npm run webpack-server"
   },
   "repository": {
     "type": "git",
