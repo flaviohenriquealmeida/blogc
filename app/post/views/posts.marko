@@ -42,7 +42,7 @@
         </tr>
     </table>
 
-    <include('../../base/views/paginator.marko') pages="${data.pages}" limit="${data.limit}" currentPage="${data.currentPage}"/>
+    <include('../../base/paginator/views/paginator.marko') paginator="${data.paginator}"/>
     <form action="/admin/post/form/add">
         <button type="submit" class="btn btn-primary">New POST</button>
     </form>

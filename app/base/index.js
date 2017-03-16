@@ -3,6 +3,7 @@ const footer = require('./views/footer.marko');
 const messages = require('./views/messages.marko');
 const page404 = require('./views/errors/404.marko');
 const page500 = require('./views/errors/500.marko');
+const paginator = require('./paginator');
 
 module.exports = {
 
@@ -14,5 +15,6 @@ module.exports = {
             page404,
             page500 
         }
-    }
+    },
+    paginator
 }

@@ -1,6 +1,7 @@
 const marked = require('marked');
 const views = require('./views');
 const service = require('./post-service');
+const paginator = require('../base').paginator;
 
 module.exports = {
 
@@ -57,13 +58,11 @@ module.exports = {
     async getPosts(req, res) {
 
         const messages = req.query.removed ? ['Post successfully removed!'] : [];
-        const currentPage = parseInt(req.query.page);
+        const page = parseInt(req.query.page);
         const limit = parseInt(req.query.limit);
         const total = await service.getNumberOfAllPosts();
-        const pages = Math.ceil(total/limit);
-        console.log(pages);
-        const posts = await service.getPosts(parseInt(currentPage), parseInt(limit));
-        res.marko(views.posts, { posts, messages, currentPage, limit, pages });
+        const posts = await service.getPosts(parseInt(page), parseInt(limit));
+        res.marko(views.posts, { posts, messages, paginator: paginator(page, limit, total, '/admin/posts') });
     },
 
     async removePost(req, res) {

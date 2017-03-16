@@ -1,8 +1,10 @@
 <div>
     <style scoped>
+        
         ul {
             text-align: center;
         }
+
         ul li {
             font-size: 1.2em;
             display: inline-block;
@@ -13,10 +15,11 @@
 
     </style>
     <ul>
-        <li for(i from 0 to data.pages -1)>
-            <a href="/admin/posts?page=${i}&limit=${data.limit}">
-                <span>${i+1}</span>
-            </a>
-        </li>
+        <a for(i from 0 to data.paginator.pages -1) 
+            href="${data.paginator.url}?page=${i}&limit=${data.paginator.limit}">
+            <li>
+                ${i+1}
+            </li>
+        </a>
     </ul>
 </div>
