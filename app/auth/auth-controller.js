@@ -41,7 +41,9 @@ module.exports = {
                  } else {
                      console.log('Token was accepted')
                      // guardou o valor decodificado do token na requisição. No caso, o login do usuário.
-                     req.usuario = decoded;    
+                     req.user = decoded.email;   
+                     console.log('token descriptografado');
+                     console.log(req.user);
                      next();
                   }
             });

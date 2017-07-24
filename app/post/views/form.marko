@@ -7,7 +7,7 @@
 </head>
 <body class="container">
 
-    <include('../../base/views/header.marko') title="${data.post._id ? 'Edit' : 'New'}"/>
+    <include('../../base/views/header.marko') title="${data.post._id ? 'Edit' : 'New'}" user="${data.user}"/>
 
     <div if(data.errors)>
     <include('../../base/views/messages.marko') messages="${data.errors}" errorMessage="true"/>

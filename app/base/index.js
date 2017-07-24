@@ -4,6 +4,7 @@ const messages = require('./views/messages.marko');
 const page404 = require('./views/errors/404.marko');
 const page500 = require('./views/errors/500.marko');
 const paginator = require('./paginator');
+const { ApplicationException, getExceptionMessage } = require('./helpers/exception');
 
 module.exports = {
 
@@ -16,5 +17,7 @@ module.exports = {
             page500 
         }
     },
-    paginator
+    paginator,
+    ApplicationException,
+    getExceptionMessage
 }

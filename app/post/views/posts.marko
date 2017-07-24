@@ -8,7 +8,7 @@
 </head>
 <body class="container">
 
-    <include('../../base/views/header.marko') title="POSTS"/>
+    <include('../../base/views/header.marko') title="POSTS" user="${data.user}"/>
 
     <div if(data.messages)>
     <include('../../base/views/messages.marko') messages="${data.messages}"/>

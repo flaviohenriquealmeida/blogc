@@ -15,7 +15,7 @@
 </head>
 <body class="container">
 
-    <include('../../base/views/header.marko') title="${data.post.title}"/>
+    <include('../../base/views/header.marko') title="${data.post.title}"  user="${data.user}"/>
 
     <p class="text-center">
         Postado no dia ${data.post.publishedIn}

@@ -1,4 +1,7 @@
 <header>
-    <a href="/admin/logout">Logout</a>
+    <if(data.user)>
+        <p>${data.user}</p>
+        <a href="/admin/logout">Logout</a>
+    </if>
     <h1 class="text-center">${data.title}</h1>
 </header>

@@ -1,5 +1,6 @@
 const Post = require('./post');
 const marked = require('marked');
+const { ApplicationException } = require('../base');
 
 module.exports = {
 
@@ -27,22 +28,20 @@ module.exports = {
     async add(post) {
 
         if(await this.isSlug(post.slug)) {
-            return { done: false, messages: ['Slug already exists!']};
+            throw new ApplicationException('Slug already exists!');
         } else {
             post.markedContent = marked(post.content);
             await Post.create(post);
-            return { done: true, messages: ['Post successfully added!']};
         }
     },
 
     async update(post) {
 
         if(await this.isSlugfromDiferentPost(post)) {
-            return { done: false, messages: ['Slug already exists!']};
+            throw new ApplicationException('Slug already exists!');
         } else {
             post.markedContent = marked(post.content);            
             await Post.findByIdAndUpdate(post._id, post)
-            return { done: true, messages: ['Post updated!']};
         }
     }, 
 
